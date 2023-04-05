@@ -2,30 +2,24 @@
 	import { newMessage } from '$lib/stores';
 
 	import Icon from '$lib/components/Icon.svelte';
+
+	import { enhance } from '$app/forms';
 	import type { Message } from '$lib/types/types';
 
-	let form: HTMLFormElement;
-
 	function handleSubmit(e: SubmitEvent): void {
-		console.log('sending...', e);
-		// if ($newMessage.sender == 'user') return;
+		if ($newMessage.role == 'human') return;
 
 		const target = e.target as HTMLFormElement;
 		const formData = new FormData(target);
 		const messageString = formData.get('message') as string;
 
-		if (messageString === '') return;
+		console.log('handle message', formData);
 
-		const message = {
-			sender: 'user',
-			message: messageString
-		} as Message;
+		if (messageString == '') return;
+
+		const message: Message = { text: messageString, role: 'human' };
 
 		$newMessage = message;
-
-		target.reset();
-
-		form.scrollIntoView();
 	}
 
 	function handleKeyDown(e: KeyboardEvent) {
@@ -42,8 +36,8 @@
 	}
 </script>
 
-<footer class="{$$props.class}">
-	<form class="relative" on:submit|preventDefault={handleSubmit} bind:this={form}>
+<footer class={$$props.class}>
+	<form class="relative" on:submit={handleSubmit} method="POST" action="?/chat">
 		<textarea
 			class="textarea resize-none"
 			name="message"

@@ -1,4 +1,4 @@
 export interface Message {
-    sender: 'user' | 'model';
-    message: string;
+    role: 'human' | 'ai' | 'system';
+    text: string;
 }

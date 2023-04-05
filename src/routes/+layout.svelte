@@ -13,7 +13,7 @@
 	import { Drawer, drawerStore } from '@skeletonlabs/skeleton';
 
 	import FoldersNavigation from '$lib/Folders/FoldersNavigation.svelte';
-	import TextInput from '$lib/components/TextInput.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 	import Header from '$lib/components/Header.svelte';
 
 	// Only show side bar on the main page
@@ -38,7 +38,7 @@
 	>
 	<!-- Page Route Content -->
 	<slot />
-	<TextInput class='px-10 py-8 absolute bottom-0 w-full'></TextInput>
+	<Footer class='px-10 py-8 absolute bottom-0 w-full'></Footer>
 
 </div>
 </AppShell>
