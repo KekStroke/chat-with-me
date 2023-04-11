@@ -7,30 +7,38 @@
 	import '../app.postcss';
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 
+	
 	// Need this to access current url
 	import { page } from '$app/stores';
-
+	
 	import { Drawer, drawerStore } from '@skeletonlabs/skeleton';
-
+	
 	import FoldersNavigation from '$lib/Folders/FoldersNavigation.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import Header from '$lib/components/Header.svelte';
+	import type { PageData } from './$types';
+	
+	let folders = [{ _id: 2, name: 'folder2' }]
 
+	export let data : PageData;
+
+	$: ({folders} = data)
+	
 	// Only show side bar on the main page
 	$: classesSidebar = $page.url.pathname !== '/' ? 'w-0' : 'w-0 lg:w-[320px]';
-
-	let container;
+	
+	let container
 </script>
 
 <Drawer>
-	<FoldersNavigation />
+	<FoldersNavigation {folders}/>
 </Drawer>
 
 <!-- App Shell -->
 <AppShell slotSidebarLeft="bg-surface-900 {classesSidebar}">
 	<!-- Left Sidebar Slot -->
 	<svelte:fragment slot="sidebarLeft">
-		<FoldersNavigation />
+		<FoldersNavigation {folders}/>
 	</svelte:fragment>
 	<div
 	class="min-h-screen relative overflow-y-scroll"

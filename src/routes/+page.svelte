@@ -28,6 +28,6 @@
 			{@html message.text.replaceAll('\n', '<br>')}
 		</p>
 	{:else}
-		<!-- empty list -->
+		<!--  -->
 	{/each}
 </div>
